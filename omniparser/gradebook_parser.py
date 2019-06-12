@@ -1,12 +1,23 @@
+# omniparser/gradebook_parser.py
+
 import os
+import statistics
+
 import pandas
 
 def calculate_average_grade_from_csv(my_csv_filepath):
     df = pandas.read_csv(my_csv_filepath)
 
     breakpoint()
+    # avg_grade = df["final_grade"].mean()
 
-    return 90.64 #"OOPS"
+    #rows = df.to_dict("records") #df = data frame / dir (df ["final_grade"]) 
+
+    #grades = [r["final_grade"] for r in rows] #> [86.7, 95.1, 60.3, 99.8, 97.4, 85.5, 97.2, 98.0, 93.9, 92.5]
+    grades = df["final_grade"].to_list()
+    avg_grade = statistics.mean(grades)
+
+    return avg_grade #90.64 #"OOPS"
 
 
 if __name__ == "__main__":
@@ -14,4 +25,9 @@ if __name__ == "__main__":
 
     gradebook_filepath = os.path.join(os.path.dirname(__file__), "..", "data", "gradebook_2019.csv")
 
-    calculate_average_grade_from_csv(gradebook_filepath)
+    print(gradebook_filepath)
+
+    #breakpoint()
+    
+    avg = calculate_average_grade_from_csv(gradebook_filepath)
+    print(avg)
